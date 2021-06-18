@@ -1,17 +1,28 @@
+
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
-#include <systemd/sd-daemon.h>
+#include <fcntl.h>
+#include <signal.h>
+#include <sys/ioctl.h>
+#include <linux/types.h>
+#include <linux/watchdog.h>
+
+int fd;
 
 int main(int argc, char ** argv)
 {
 	printf("systemd watchdog test\n");
-	sd_notify(0, "READY=1\n"
-		     "STATUS=main loop running...\n");
 
+    fd = open("/dev/watchdog", O_WRONLY);
+    
+    int dummy;
+    
 	while(1) {
 		sleep(1);
 		printf("kick dog\n");
-		sd_notify(0, "WATCHDOG=1");
+        ioctl(fd, WDIOC_KEEPALIVE, &dummy);
 	}
 }
 
