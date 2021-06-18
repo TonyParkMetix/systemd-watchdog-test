@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
-#include <usr/include/systemd/sd-daemon.h>
+#include "sd-daemon.h"
 
 int main(int argc, char ** argv)
 {
