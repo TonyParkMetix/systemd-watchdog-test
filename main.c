@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <unistd.h>
 #include "include/systemd/sd-daemon.h"
 
@@ -11,6 +12,9 @@ int main(int argc, char ** argv)
 
 	int kicks=0;
     char message[50];
+    
+    srandom(time(NULL));
+    
     while(1) {
 		sleep(1);
 		printf("kick dog\n");
